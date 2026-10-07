@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KYNOVA | Human Power RPG</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .large-avatar {
+            overflow: hidden;
+            align-items: center;
+        }
+
+        .large-avatar .rider-image {
+            display: block;
+            width: 180px;
+            height: 220px;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">
+            K
+        </div>
+
+        <div>
+            <h1>KYNOVA</h1>
+            <p>HUMAN POWER RPG</p>
+        </div>
+
+    </div>
+
+    <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <span>OFFLINE SYSTEM</span>
+
+    </div>
+
+</header>
+
+<main class="game-container">
+
+    <section class="player-header">
+
+        <div class="chat-message coach">
+
+    <div class="coach-avatars">
+
+        <!-- Small robot -->
+        <div class="chat-avatar robot-avatar">
+            AI
+        </div>
+
+        <!-- Fitness character -->
+        <div class="chat-avatar rider-avatar">
+            <img src="images.jpg" alt="Fitness Rider">
+        </div>
+
+    </div>
+
+    <div class="bubble">
+
+        <strong>Kynova Coach</strong>
+
+        <p>
+            Ready to ride? Let's generate some energy!
+        </p>
+
+    </div>
+
+</div>
+
+                <span class="player-label">
+                    RIDER
+                </span>
+
+                <h2>ENERGY RIDER</h2>
+
+                <div class="rank">
+                    <span id="level">LEVEL 1</span>
+                    <span class="rank-name" id="rankName">
+                        INITIATE
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="xp-container">
+
+            <div class="xp-top">
+
+                <span>EXPERIENCE</span>
+
+                <strong>
+                    <span id="xp">0</span> /
+                    <span id="nextXP">100</span> XP
+                </strong>
+
+            </div>
+
+            <div class="xp-track">
+
+                <div id="xpBar"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="game-hero">
+
+        <div class="hero-left">
+
+            <span class="quest-label">
+                CURRENT MISSION
+            </span>
+
+            <h2>
+                GENERATE
+                <span>ENERGY</span>
+            </h2>
+
+            <p>
+                Your pedaling powers the system.
+                Every rotation contributes to your energy score.
+            </p>
+
+            <div class="mission-card">
+
+                <div class="mission-icon">
+                    ⚡
+                </div>
+
+                <div class="mission-content">
+
+                    <span>SESSION QUEST</span>
+
+                    <strong>
+                        Generate 5 Wh
+                    </strong>
+
+                    <div class="mission-progress">
+
+                        <div id="questBar"></div>
+
+                    </div>
+
+                    <small>
+                        <span id="questEnergy">0.000</span>
+                        / 5.000 Wh
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="energy-core">
+
+            <div class="core-ring">
+
+                <div class="core-inner">
+
+                    <span>ENERGY</span>
+
+                    <strong id="energyHero">
+                        0.000
+                    </strong>
+
+                    <small>Wh</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="hud-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>LIVE SYSTEM</span>
+                <h3>Rider HUD</h3>
+            </div>
+
+            <div class="simulation-label">
+                SIMULATED HARDWARE
+            </div>
+
+        </div>
+
+        <div class="hud-grid">
+
+            <div class="hud-card heart">
+
+                <div class="hud-title">
+
+                    <span>❤️ HEART RATE</span>
+
+                    <small>MAX30102</small>
+
+                </div>
+
+                <strong id="heartRate">
+                    --
+                </strong>
+
+                <small>BPM</small>
+
+                <div class="hud-line">
+                    <div id="heartBar"></div>
+                </div>
+
+            </div>
+
+            <div class="hud-card">
+
+                <div class="hud-title">
+
+                    <span>↻ CADENCE</span>
+
+                    <small>HALL</small>
+
+                </div>
+
+                <strong id="rpm">
+                    --
+                </strong>
+
+                <small>RPM</small>
+
+                <div class="hud-line">
+                    <div id="rpmBar"></div>
+                </div>
+
+            </div>
+
+            <div class="hud-card power">
+
+                <div class="hud-title">
+
+                    <span>⚡ POWER</span>
+
+                    <small>V × I</small>
+
+                </div>
+
+                <strong id="power">
+                    --
+                </strong>
+
+                <small>W</small>
+
+                <div class="hud-line">
+                    <div id="powerBar"></div>
+                </div>
+
+            </div>
+
+            <div class="hud-card">
+
+                <div class="hud-title">
+
+                    <span>VOLTAGE</span>
+
+                    <small>INA219</small>
+
+                </div>
+
+                <strong id="voltage">
+                    --
+                </strong>
+
+                <small>V</small>
+
+                <div class="hud-line">
+                    <div id="voltageBar"></div>
+                </div>
+
+            </div>
+
+            <div class="hud-card">
+
+                <div class="hud-title">
+
+                    <span>CURRENT</span>
+
+                    <small>INA219</small>
+
+                </div>
+
+                <strong id="current">
+                    --
+                </strong>
+
+                <small>A</small>
+
+                <div class="hud-line">
+                    <div id="currentBar"></div>
+                </div>
+
+            </div>
+
+            <div class="hud-card">
+
+                <div class="hud-title">
+
+                    <span>TIME</span>
+
+                    <small>SESSION</small>
+
+                </div>
+
+                <strong id="duration">
+                    00:00
+                </strong>
+
+                <small>MIN</small>
+
+                <div class="hud-line">
+                    <div id="timeBar"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="control-panel">
+
+        <div>
+
+            <span>RIDE STATUS</span>
+
+            <strong id="sessionStatus">
+                READY
+            </strong>
+
+        </div>
+
+        <div class="control-buttons">
+
+            <button id="startBtn" class="start-btn">
+                ▶ START RIDE
+            </button>
+
+            <button id="stopBtn" class="stop-btn" disabled>
+                ■ END RIDE
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="game-grid">
+
+        <div class="game-card avatar-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>PLAYER</span>
+                    <h3>Energy Rider</h3>
+                </div>
+
+                <span class="level-badge" id="levelBadge">
+                    LV.1
+                </span>
+
+            </div>
+
+            <!-- YOUR PROVIDED RIDER IMAGE -->
+            <div class="large-avatar">
+
+                <img
+                    class="rider-image"
+                    src="pic2.avif"
+                    alt="Energy Rider"
+                >
+
+            </div>
+
+            <div class="character-stats">
+
+                <div>
+                    <span>CLASS</span>
+                    <strong>ENERGY RIDER</strong>
+                </div>
+
+                <div>
+                    <span>STATUS</span>
+                    <strong id="riderStatus">
+                        READY
+                    </strong>
+                </div>
+
+                <div>
+                    <span>STREAK</span>
+                    <strong>
+                        <span id="streak">0</span> RIDES
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="game-card coach-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <span>LOCAL AI</span>
+                    <h3>Kynova Coach</h3>
+                </div>
+
+                <span class="offline-badge">
+                    OFFLINE
+                </span>
+
+            </div>
+
+            <div class="coach-window" id="chatWindow">
+
+                <div class="chat-message coach">
+
+                    <div class="chat-avatar">
+                        AI
+                    </div>
+
+                    <div class="bubble">
+
+                        <strong>Kynova Coach</strong>
+
+                        <p>
+                            Welcome, Energy Rider.
+                            Start your ride and I will
+                            monitor your cadence and
+                            heart rate locally.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="chat-input-area">
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Ask your coach..."
+                >
+
+                <button id="sendChat">
+                    SEND
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="achievements-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>PROGRESSION</span>
+                <h3>Achievements</h3>
+            </div>
+
+        </div>
+
+        <div class="achievement-grid">
+
+            <div class="achievement locked" id="achievementRide">
+
+                <div class="achievement-icon">
+                    🚴
+                </div>
+
+                <div>
+
+                    <strong>FIRST RIDE</strong>
+
+                    <p>
+                        Complete your first workout.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="achievement locked" id="achievementEnergy">
+
+                <div class="achievement-icon">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <strong>ENERGY MAKER</strong>
+
+                    <p>
+                        Generate 5 Wh of energy.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="achievement locked" id="achievementTime">
+
+                <div class="achievement-icon">
+                    ⏱
+                </div>
+
+                <div>
+
+                    <strong>ENDURANCE</strong>
+
+                    <p>
+                        Ride for 10 minutes.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="achievement locked" id="achievementPower">
+
+                <div class="achievement-icon">
+                    ⚙
+                </div>
+
+                <div>
+
+                    <strong>POWER RIDER</strong>
+
+                    <p>
+                        Reach 50 W generated power.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="summary-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>MISSION RESULTS</span>
+                <h3>Ride Summary</h3>
+            </div>
+
+        </div>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>ENERGY</span>
+                <strong>
+                    <span id="summaryEnergy">0.000</span> Wh
+                </strong>
+            </div>
+
+            <div>
+                <span>AVG POWER</span>
+                <strong>
+                    <span id="avgPower">0</span> W
+                </strong>
+            </div>
+
+            <div>
+                <span>CALORIES</span>
+                <strong>
+                    <span id="calories">0</span> kcal
+                </strong>
+            </div>
+
+            <div>
+                <span>XP EARNED</span>
+                <strong>
+                    +<span id="sessionXP">0</span>
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="history-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>LOCAL DATA</span>
+                <h3>Ride History</h3>
+            </div>
+
+            <button id="clearHistory" class="clear-button">
+                CLEAR
+            </button>
+
+        </div>
+
+        <div class="history-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>DATE</th>
+                        <th>DURATION</th>
+                        <th>ENERGY</th>
+                        <th>POWER</th>
+                        <th>XP</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyBody"></tbody>
+
+            </table>
+
+            <div id="emptyHistory" class="empty-history">
+                No completed rides yet.
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="architecture">
+
+        <span>KYNOVA SYSTEM</span>
+
+        <p>
+            EXISTING BIKE → PMDC GENERATOR → CHARGE CONTROLLER →
+            BATTERY → SENSORS → ESP32-S3 → BLE → OFFLINE APP
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+    KYNOVA • SMART HUMAN-POWERED ENERGY & FITNESS PLATFORM
+
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
